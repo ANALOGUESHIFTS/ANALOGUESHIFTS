@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import gsap from 'gsap'
 import AppLayout from '@/components/Layouts/AppLayout'
 import SeoController from '@/lib/SeoController'
+import axios from '@/lib/axios'
 
 function contact() {
     const seoData = {
@@ -47,6 +48,32 @@ function contact() {
             stagger: 0.2,
         })
     }, [])
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    // const [tel, setTel] = useState('')
+    // const [subject, setSubject] = useState('')
+    const [message, setMessage] = useState('')
+
+    const submitForm = async event => {
+        event.preventDefault()
+        let data = JSON.stringify({
+            name,
+            email,
+            // tel,
+            // subject,
+            message,
+        })
+
+        axios
+            .post('/contact', data)
+            .then(response => {
+                console.log(JSON.stringify(response.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
         <AppLayout>
@@ -120,11 +147,17 @@ function contact() {
                                     </p>
                                 </div>
                                 <div className="flex justify-center text-yellow-900 w-full py-9 px-5 md:px-24">
-                                    <form className="flex flex-col gap-9 w-full">
+                                    <form
+                                        onSubmit={submitForm}
+                                        className="flex flex-col gap-9 w-full">
                                         <div className="grid md:flex gap-5">
                                             <div className="grid gap-5 w-full">
                                                 <label>Name</label>
                                                 <input
+                                                    value={name}
+                                                    onChange={e => {
+                                                        setName(e.target.value)
+                                                    }}
                                                     className="bg-slate-100 w-full py-2 px-3 outline-none rounded border-l-2 border-as"
                                                     name="name"
                                                 />
@@ -132,6 +165,10 @@ function contact() {
                                             <div className="grid gap-5 w-full">
                                                 <label>Email</label>
                                                 <input
+                                                    value={email}
+                                                    onChange={e => {
+                                                        setEmail(e.target.value)
+                                                    }}
                                                     className="bg-slate-100 w-full py-2 px-3 outline-none rounded border-l-2 border-as"
                                                     name="email"
                                                 />
@@ -139,7 +176,18 @@ function contact() {
                                         </div>
                                         <div className="grid gap-5 w-full">
                                             <label>Message</label>
-                                            <textarea className="bg-slate-100 h-56 w-full py-2 px-3 outline-none rounded border-l-2 border-as" />
+                                            <textarea
+                                                value={message}
+                                                onChange={e => {
+                                                    setMessage(e.target.value)
+                                                }}
+                                                className="bg-slate-100 h-56 w-full py-2 px-3 outline-none rounded border-l-2 border-as"
+                                            />
+                                        </div>
+                                        <div className="flex justify-end">
+                                            <button className="bg-as py-2 px-3 rounded-md">
+                                                submit
+                                            </button>
                                         </div>
                                     </form>
                                 </div>

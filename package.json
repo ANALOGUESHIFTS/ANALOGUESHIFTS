@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix"
   },
   "engines": {
-    "node": "20.9.0"
+    "node": "18.x"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",

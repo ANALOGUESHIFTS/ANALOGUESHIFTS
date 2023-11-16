@@ -111,7 +111,7 @@ export default function View() {
                                     </a>
                                 ) : (
                                     <a
-                                        href={job.application}
+                                        href={`https://app.analogueshifts.com/apply/${job.display}`}
                                         className="bg-as text-white w-full lg:w-fit py-2 px-4 rounded-md fade-in">
                                         Apply here
                                     </a>

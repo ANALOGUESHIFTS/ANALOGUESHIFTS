@@ -103,7 +103,7 @@ export default function View() {
                                 />
                             </div>
                             <div className="flex lg:justify-end w-full py-2 px-0">
-                                {job.application === '' || null ? (
+                                {job.application == '' || null ? (
                                     <a
                                         href={`https://app.analogueshifts.com/apply/${job.display}`}
                                         className="bg-as text-white w-full lg:w-fit py-2 px-4 rounded-md fade-in">

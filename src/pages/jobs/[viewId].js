@@ -111,7 +111,8 @@ export default function View() {
                                     </a>
                                 ) : (
                                     <a
-                                        href="/job/apply/{job.display}"
+                                        target="blank"
+                                        href={job.application}
                                         className="bg-as text-white w-full lg:w-fit py-2 px-4 rounded-md fade-in">
                                         Apply here
                                     </a>
